@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.fffd.l23o6.pojo.vo.route.AddRouteRequest;
 import org.fffd.l23o6.pojo.vo.route.RouteVO;
+import org.fffd.l23o6.service.RouteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,25 +15,30 @@ import java.util.List;
 @RequestMapping("/v1/")
 @RequiredArgsConstructor
 public class RouteController {
+    private final RouteService routeService;
     @PostMapping("admin/route")
     public CommonResponse<?> addRoute(@Valid @RequestBody AddRouteRequest request) {
         // There should be something, and so do the following methods.
         // TODO: 2023/5/26
+        routeService.addRoute(request.getName(), request.getStationIds());
         return CommonResponse.success();
     }
 
     @GetMapping("admin/route")
     public CommonResponse<List<RouteVO>> getRoutes() {
+        routeService.listRoutes();
         return CommonResponse.success();
     }
 
     @GetMapping("admin/route/{routeId}")
     public CommonResponse<RouteVO> getRoute(@PathVariable("routeId") Long routeId) {
+        routeService.getRoute(routeId);
         return CommonResponse.success();
     }
 
     @PutMapping("admin/route/{routeId}")
     public CommonResponse<?> editRoute(@PathVariable("routeId") Long routeId, @Valid @RequestBody AddRouteRequest request) {
+        routeService.editRoute(routeId, request.getName(), request.getStationIds());
         return CommonResponse.success();
     }
 }

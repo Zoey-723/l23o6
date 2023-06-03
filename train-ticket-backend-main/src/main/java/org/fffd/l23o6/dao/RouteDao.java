@@ -6,4 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface RouteDao extends JpaRepository<RouteEntity, Long>{
     // TODO: 2023/5/26
     // This is empty! But should there be anything?
+    RouteEntity findRouteByName(String name);
+    RouteEntity findRouteById(Long routeId);
 }

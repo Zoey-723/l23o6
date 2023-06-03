@@ -5,5 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TrainDao extends JpaRepository<TrainEntity, Long>{
     // TODO: 2023/5/26
-    TrainEntity getTrain(Long trainId);
+    TrainEntity findTrainById(Long trainId);
+
+    TrainEntity findTrainByName(String name);
+
+
 }
