@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.fffd.l23o6.pojo.vo.route.AddRouteRequest;
 import org.fffd.l23o6.pojo.vo.route.RouteVO;
 import org.fffd.l23o6.service.RouteService;
+import org.fffd.l23o6.service.impl.RouteServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RouteController {
     private final RouteService routeService;
-    @PostMapping("admin/route")
+    @PostMapping("admin/addRoute")
     public CommonResponse<?> addRoute(@Valid @RequestBody AddRouteRequest request) {
         // There should be something, and so do the following methods.
         // TODO: 2023/5/26
@@ -24,19 +25,21 @@ public class RouteController {
         return CommonResponse.success();
     }
 
-    @GetMapping("admin/route")
+    @GetMapping("admin/getRoutes")
     public CommonResponse<List<RouteVO>> getRoutes() {
-        routeService.listRoutes();
-        return CommonResponse.success();
+//        routeService.listRoutes();
+//        return CommonResponse.success();
+        List<RouteVO> routes = routeService.listRoutes();
+        return CommonResponse.success(routes);
     }
 
-    @GetMapping("admin/route/{routeId}")
+    @GetMapping("admin/getRoute/{routeId}")
     public CommonResponse<RouteVO> getRoute(@PathVariable("routeId") Long routeId) {
-        routeService.getRoute(routeId);
-        return CommonResponse.success();
+        RouteVO route = routeService.getRoute(routeId);
+        return CommonResponse.success(route);
     }
 
-    @PutMapping("admin/route/{routeId}")
+    @PutMapping("admin/editRoute/{routeId}")
     public CommonResponse<?> editRoute(@PathVariable("routeId") Long routeId, @Valid @RequestBody AddRouteRequest request) {
         routeService.editRoute(routeId, request.getName(), request.getStationIds());
         return CommonResponse.success();

@@ -42,7 +42,12 @@ public class TrainController {
         return CommonResponse.success(trainService.getTrain(trainId));
     }
 
-    @PostMapping("admin/train")
+    @GetMapping("admin/train/{trainId}")
+    public CommonResponse<AdminTrainVO> getTrainAdmin(@PathVariable Long trainId){
+        //return CommonResponse.success();
+        return CommonResponse.success(trainService.getTrainAdmin(trainId));
+    }
+    @PostMapping("admin/addTrain")
     public CommonResponse<?> addTrain(@Valid @RequestBody AddTrainRequest request){
         trainService.addTrain(request.getName(), request.getRouteId(), request.getTrainType(), request.getDate(), request.getArrivalTimes(), request.getDepartureTimes());
         return CommonResponse.success();
@@ -53,8 +58,5 @@ public class TrainController {
         return CommonResponse.success(trainService.listTrainsAdmin());
     }
 
-    @GetMapping("admin/train/{trainId}")
-    public CommonResponse<AdminTrainVO> getTrainAdmin(@PathVariable Long trainId){
-        return CommonResponse.success();
-    }
+
 }

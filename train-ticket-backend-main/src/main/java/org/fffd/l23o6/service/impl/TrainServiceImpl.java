@@ -29,6 +29,10 @@ public class TrainServiceImpl implements TrainService {
     public TrainDetailVO getTrain(Long trainId){
         return TrainMapper.INSTANCE.toDetailTrainVO(trainDao.findTrainById(trainId));
     }
+
+    public AdminTrainVO getTrainAdmin(Long trainId){
+        return TrainMapper.INSTANCE.toAdminTrainVO(trainDao.findTrainById(trainId));
+    }
     public List<TrainVO> listTrains(Long startStationId, Long endStationId, String date){
         return trainDao.findAll(Sort.by(Sort.Direction.ASC, "name")).stream().map(TrainMapper.INSTANCE::toTrainVO).collect(Collectors.toList());
     }
