@@ -54,10 +54,10 @@ public class UserController {
         }
     }
 
-    @PostMapping("session")
+    @DeleteMapping("session")
     public CommonResponse<?> logout() {
         StpUtil.checkLogin();
-        StpUtil.logout();
+        //StpUtil.logout();
         return CommonResponse.success();
     }
 
