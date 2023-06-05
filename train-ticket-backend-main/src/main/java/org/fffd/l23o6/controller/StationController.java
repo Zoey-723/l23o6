@@ -36,7 +36,7 @@ public class StationController {
         return CommonResponse.success(stationService.getStation(stationId));
     }
 
-    @PostMapping("admin/addStation")
+    @PostMapping("admin/station")
     public CommonResponse<?> addStation(@Valid @RequestBody AddStationRequest request) {
         // Throws BizException if add failed.
         try {
@@ -53,7 +53,7 @@ public class StationController {
         }
     }
 
-    @PutMapping("admin/editStation/{stationId}")
+    @PutMapping("admin/station/{stationId}")
     public CommonResponse<?> editStation(@PathVariable("stationId") Long stationId, @Valid @RequestBody AddStationRequest request) {
         stationService.editStation(stationId, request.getName());
         return CommonResponse.success();

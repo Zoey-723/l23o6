@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RouteController {
     private final RouteService routeService;
-    @PostMapping("admin/addRoute")
+    @PostMapping("admin/route")
     public CommonResponse<?> addRoute(@Valid @RequestBody AddRouteRequest request) {
         // There should be something, and so do the following methods.
         // TODO: 2023/5/26
@@ -25,7 +25,7 @@ public class RouteController {
         return CommonResponse.success();
     }
 
-    @GetMapping("admin/getRoutes")
+    @GetMapping("admin/route")
     public CommonResponse<List<RouteVO>> getRoutes() {
 //        routeService.listRoutes();
 //        return CommonResponse.success();
@@ -33,13 +33,13 @@ public class RouteController {
         return CommonResponse.success(routes);
     }
 
-    @GetMapping("admin/getRoute/{routeId}")
+    @GetMapping("admin/route/{routeId}")
     public CommonResponse<RouteVO> getRoute(@PathVariable("routeId") Long routeId) {
         RouteVO route = routeService.getRoute(routeId);
         return CommonResponse.success(route);
     }
 
-    @PutMapping("admin/editRoute/{routeId}")
+    @PutMapping("admin/route/{routeId}")
     public CommonResponse<?> editRoute(@PathVariable("routeId") Long routeId, @Valid @RequestBody AddRouteRequest request) {
         routeService.editRoute(routeId, request.getName(), request.getStationIds());
         return CommonResponse.success();

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    @PostMapping("session/login")
+    @PostMapping("session")
     public CommonResponse<?> login(@Valid @RequestBody LoginRequest request) {
         // Throws BizException if auth failed.
         try {
@@ -37,7 +37,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("session/register")
+    @PostMapping("user")
     public CommonResponse<?> register(@Valid @RequestBody RegisterRequest request) {
         // Throws BizException if register failed.
         try {
@@ -54,7 +54,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("session/logout")
+    @PostMapping("session")
     public CommonResponse<?> logout() {
         StpUtil.checkLogin();
         StpUtil.logout();
@@ -67,7 +67,7 @@ public class UserController {
         return CommonResponse.success(UserMapper.INSTANCE.toUserVO(userService.findByUserName(String.valueOf(StpUtil.getLoginId()))));
     }
 
-    @PutMapping("user/edit")
+    @PutMapping("user")
     public CommonResponse<?> editInfo(@Valid @RequestBody EditUserInfoRequest request) {
         StpUtil.checkLogin();
         userService.editInfo(StpUtil.getLoginIdAsString(), request.getName(), request.getIdn(), request.getPhone(), request.getType());
